@@ -3,6 +3,7 @@
 %bcond_without	apidocs		# do not build and package API docs
 #
 Summary:	GLib library for talking to WWAN modems and devices using MBIM protocol
+Summary(pl.UTF-8):	Biblioteka GLib do komunikacji z modemami i urządzeniami WWAN z użyciem protokołu MBIM
 Name:		libmbim
 Version:	1.4.0
 Release:	1
@@ -18,11 +19,17 @@ BuildRequires:	gtk-doc
 BuildRequires:	libtool >= 2:2.2
 BuildRequires:	pkgconfig
 BuildRequires:	udev-glib-devel >= 147
+Requires:	glib2 >= 1:2.32.0
+Requires:	udev-glib >= 147
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
 libmbim is a GLib library for talking to WWAN modems and devices which
 speak the Mobile Interface Broadband Model (MBIM) protocol.
+
+%description -l pl.UTF-8
+libmbim to biblioteka GLib do komunikacji z modemami i urządzeniami
+WWAN, obsługującymi protokół MBIM (Mobile Interface Broadband Model).
 
 %package devel
 Summary:	Header files for libmbim library
@@ -72,6 +79,7 @@ Dokumentacja API biblioteki libmbim.
 %{__automake}
 %configure \
 	%{__enable_disable apidocs gtk-doc} \
+	--disable-silent-rules \
 	--with-html-dir=%{_gtkdocdir}
 %{__make}
 
