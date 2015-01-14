@@ -1,3 +1,4 @@
+# TODO: --enable-mbim-username=???
 #
 # Conditional build:
 %bcond_without	apidocs		# do not build and package API docs
@@ -5,22 +6,23 @@
 Summary:	GLib library for talking to WWAN modems and devices using MBIM protocol
 Summary(pl.UTF-8):	Biblioteka GLib do komunikacji z modemami i urządzeniami WWAN z użyciem protokołu MBIM
 Name:		libmbim
-Version:	1.10.0
+Version:	1.12.0
 Release:	1
 License:	LGPL v2
 Group:		Libraries
 Source0:	http://www.freedesktop.org/software/libmbim/%{name}-%{version}.tar.xz
-# Source0-md5:	f2d9ec29071be632e046e38222166515
+# Source0-md5:	ab9cdf5c57bd1b4c1afd36890723de7f
 URL:		http://www.freedesktop.org/wiki/Software/libmbim
 BuildRequires:	autoconf >= 2.68
 BuildRequires:	automake >= 1:1.11
 BuildRequires:	glib2-devel >= 1:2.32.0
 BuildRequires:	gtk-doc >= 1.0
+BuildRequires:	help2man
 BuildRequires:	libtool >= 2:2.2
 BuildRequires:	pkgconfig
-BuildRequires:	udev-glib-devel >= 147
+BuildRequires:	udev-glib-devel >= 1:147
 Requires:	glib2 >= 1:2.32.0
-Requires:	udev-glib >= 147
+Requires:	udev-glib >= 1:147
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
