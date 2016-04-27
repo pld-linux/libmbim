@@ -2,12 +2,12 @@
 #
 # Conditional build:
 %bcond_without	apidocs		# do not build and package API docs
-#
+
 Summary:	GLib library for talking to WWAN modems and devices using MBIM protocol
 Summary(pl.UTF-8):	Biblioteka GLib do komunikacji z modemami i urządzeniami WWAN z użyciem protokołu MBIM
 Name:		libmbim
 Version:	1.12.4
-Release:	1
+Release:	2
 License:	LGPL v2
 Group:		Libraries
 Source0:	https://www.freedesktop.org/software/libmbim/%{name}-%{version}.tar.xz
@@ -63,6 +63,9 @@ Summary:	libmbim API documentation
 Summary(pl.UTF-8):	Dokumentacja API biblioteki libmbim
 Group:		Documentation
 Requires:	gtk-doc-common
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description apidocs
 API documentation for libmbim library.
