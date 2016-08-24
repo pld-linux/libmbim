@@ -6,12 +6,12 @@
 Summary:	GLib library for talking to WWAN modems and devices using MBIM protocol
 Summary(pl.UTF-8):	Biblioteka GLib do komunikacji z modemami i urządzeniami WWAN z użyciem protokołu MBIM
 Name:		libmbim
-Version:	1.12.4
-Release:	2
+Version:	1.14.0
+Release:	1
 License:	LGPL v2
 Group:		Libraries
 Source0:	https://www.freedesktop.org/software/libmbim/%{name}-%{version}.tar.xz
-# Source0-md5:	4561bc490fcd439aa805c1692b25cb61
+# Source0-md5:	2ed809e65c85353d3ab59e372890e549
 URL:		https://www.freedesktop.org/wiki/Software/libmbim
 BuildRequires:	autoconf >= 2.68
 BuildRequires:	automake >= 1:1.11
@@ -20,6 +20,7 @@ BuildRequires:	gtk-doc >= 1.0
 BuildRequires:	help2man
 BuildRequires:	libtool >= 2:2.2
 BuildRequires:	pkgconfig
+BuildRequires:	rpmbuild(macros) >= 1.673
 BuildRequires:	udev-glib-devel >= 1:147
 Requires:	glib2 >= 1:2.32.0
 Requires:	udev-glib >= 1:147
@@ -72,6 +73,19 @@ API documentation for libmbim library.
 
 %description apidocs -l pl.UTF-8
 Dokumentacja API biblioteki libmbim.
+
+%package -n bash-completion-libmbim
+Summary:	Bash completion for libmbim commands
+Summary(pl.UTF-8):	Bashowe dopełnianie składni poleceń libmbim
+Group:		Applications/Shells
+Requires:	%{name} = %{version}-%{release}
+Requires:	bash-completion >= 2.0
+
+%description -n bash-completion-libmbim
+Bash completion for libmbim commands (mbimcli).
+
+%description -n bash-completion-libmbim -l pl.UTF-8
+Bashowe dopełnianie składni poleceń libmbim (mbimcli).
 
 %prep
 %setup -q
@@ -128,3 +142,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %{_gtkdocdir}/libmbim-glib
 %endif
+
+%files -n bash-completion-libmbim
+%defattr(644,root,root,755)
+%{bash_compdir}/mbimcli
