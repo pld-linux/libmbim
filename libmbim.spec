@@ -6,24 +6,26 @@
 Summary:	GLib library for talking to WWAN modems and devices using MBIM protocol
 Summary(pl.UTF-8):	Biblioteka GLib do komunikacji z modemami i urządzeniami WWAN z użyciem protokołu MBIM
 Name:		libmbim
-Version:	1.22.0
+Version:	1.24.0
 Release:	1
 License:	LGPL v2
 Group:		Libraries
 Source0:	https://www.freedesktop.org/software/libmbim/%{name}-%{version}.tar.xz
-# Source0-md5:	87060e8957013177e4140edc6f64f5bd
+# Source0-md5:	6a7ecb43a4b862a37fbd560c57a737f2
 URL:		https://www.freedesktop.org/wiki/Software/libmbim
 BuildRequires:	autoconf >= 2.68
 BuildRequires:	autoconf-archive >= 2017.03.21
 BuildRequires:	automake >= 1:1.11
-BuildRequires:	glib2-devel >= 1:2.36
+BuildRequires:	glib2-devel >= 1:2.48
+BuildRequires:	gobject-introspection-devel >= 0.9.6
 BuildRequires:	gtk-doc >= 1.0
 BuildRequires:	help2man
 BuildRequires:	libtool >= 2:2.2
 BuildRequires:	pkgconfig
+BuildRequires:	python
 BuildRequires:	rpmbuild(macros) >= 1.673
 BuildRequires:	udev-glib-devel >= 1:147
-Requires:	glib2 >= 1:2.36
+Requires:	glib2 >= 1:2.48
 Requires:	udev-glib >= 1:147
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -40,7 +42,7 @@ Summary:	Header files for libmbim library
 Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki libmbim
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
-Requires:	glib2-devel >= 1:2.36
+Requires:	glib2-devel >= 1:2.48
 
 %description devel
 Header files for libmbim library.
@@ -125,6 +127,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libexecdir}/mbim-proxy
 %attr(755,root,root) %{_libdir}/libmbim-glib.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libmbim-glib.so.4
+%{_libdir}/girepository-1.0/Mbim-1.0.typelib
 %{_mandir}/man1/mbim-network.1*
 %{_mandir}/man1/mbimcli.1*
 
@@ -132,6 +135,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libmbim-glib.so
 %{_includedir}/libmbim-glib
+%{_datadir}/gir-1.0/Mbim-1.0.gir
 %{_pkgconfigdir}/mbim-glib.pc
 
 %files static
