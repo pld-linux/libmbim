@@ -6,12 +6,12 @@
 Summary:	GLib library for talking to WWAN modems and devices using MBIM protocol
 Summary(pl.UTF-8):	Biblioteka GLib do komunikacji z modemami i urządzeniami WWAN z użyciem protokołu MBIM
 Name:		libmbim
-Version:	1.24.0
+Version:	1.24.2
 Release:	1
 License:	LGPL v2
 Group:		Libraries
 Source0:	https://www.freedesktop.org/software/libmbim/%{name}-%{version}.tar.xz
-# Source0-md5:	6a7ecb43a4b862a37fbd560c57a737f2
+# Source0-md5:	6c2b490af87773c8446f37536e7411ac
 URL:		https://www.freedesktop.org/wiki/Software/libmbim
 BuildRequires:	autoconf >= 2.68
 BuildRequires:	autoconf-archive >= 2017.03.21
