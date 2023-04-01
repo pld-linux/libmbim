@@ -14,6 +14,7 @@ Group:		Libraries
 Source0:	https://gitlab.freedesktop.org/mobile-broadband/libmbim/-/archive/%{version}/%{name}-%{version}.tar.bz2
 # Source0-md5:	b04f563cf883cd1168bcb20c367ae8da
 URL:		https://www.freedesktop.org/wiki/Software/libmbim
+BuildRequires:	bash-completion-devel
 BuildRequires:	glib2-devel >= 1:2.56
 BuildRequires:	gobject-introspection-devel >= 0.9.6
 BuildRequires:	gtk-doc >= 1.0
