@@ -80,6 +80,7 @@ Summary(pl.UTF-8):	Bashowe dopełnianie składni poleceń libmbim
 Group:		Applications/Shells
 Requires:	%{name} = %{version}-%{release}
 Requires:	bash-completion >= 1:2.0
+BuildArch:	noarch
 
 %description -n bash-completion-libmbim
 Bash completion for libmbim commands (mbimcli).
