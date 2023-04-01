@@ -1,29 +1,29 @@
-# TODO: --enable-mbim-username=???
+# TODO: -Dmbim_username=???
 #
 # Conditional build:
-%bcond_without	apidocs		# do not build and package API docs
+%bcond_without	apidocs		# (gtk-doc based) API documentation
 
 Summary:	GLib library for talking to WWAN modems and devices using MBIM protocol
 Summary(pl.UTF-8):	Biblioteka GLib do komunikacji z modemami i urządzeniami WWAN z użyciem protokołu MBIM
 Name:		libmbim
-Version:	1.26.4
+Version:	1.28.4
 Release:	1
 License:	LGPL v2
 Group:		Libraries
-Source0:	https://www.freedesktop.org/software/libmbim/%{name}-%{version}.tar.xz
-# Source0-md5:	58dea20cad346f31d2873b68385a9973
+#Source0Download: https://gitlab.freedesktop.org/mobile-broadband/libmbim/-/tags
+Source0:	https://gitlab.freedesktop.org/mobile-broadband/libmbim/-/archive/%{version}/%{name}-%{version}.tar.bz2
+# Source0-md5:	b04f563cf883cd1168bcb20c367ae8da
 URL:		https://www.freedesktop.org/wiki/Software/libmbim
-BuildRequires:	autoconf >= 2.68
-BuildRequires:	automake >= 1:1.11
 BuildRequires:	glib2-devel >= 1:2.56
 BuildRequires:	gobject-introspection-devel >= 0.9.6
 BuildRequires:	gtk-doc >= 1.0
 BuildRequires:	help2man
-BuildRequires:	libtool >= 2:2.2
+BuildRequires:	meson >= 0.53.0
+BuildRequires:	ninja >= 1.5
 BuildRequires:	pkgconfig
 BuildRequires:	python3 >= 1:3
 BuildRequires:	rpm-build >= 4.6
-BuildRequires:	rpmbuild(macros) >= 1.673
+BuildRequires:	rpmbuild(macros) >= 1.736
 Requires:	glib2 >= 1:2.56
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -78,7 +78,7 @@ Summary:	Bash completion for libmbim commands
 Summary(pl.UTF-8):	Bashowe dopełnianie składni poleceń libmbim
 Group:		Applications/Shells
 Requires:	%{name} = %{version}-%{release}
-Requires:	bash-completion >= 2.0
+Requires:	bash-completion >= 1:2.0
 
 %description -n bash-completion-libmbim
 Bash completion for libmbim commands (mbimcli).
@@ -90,25 +90,15 @@ Bashowe dopełnianie składni poleceń libmbim (mbimcli).
 %setup -q
 
 %build
-%{__libtoolize}
-%{__aclocal} -I m4
-%{__autoconf}
-%{__autoheader}
-%{__automake}
-%configure \
-	PYTHON=%{__python3} \
-	%{__enable_disable apidocs gtk-doc} \
-	--disable-silent-rules \
-	--with-html-dir=%{_gtkdocdir}
-%{__make}
+%meson build \
+	%{?with_apidocs:-Dgtk_doc=true}
+
+%ninja_build -C build
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
-%{__make} install \
-	DESTDIR=$RPM_BUILD_ROOT
-
-%{__rm} $RPM_BUILD_ROOT%{_libdir}/*.la
+%ninja_install -C build
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -118,7 +108,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc AUTHORS NEWS README
+%doc AUTHORS NEWS README.md
 %attr(755,root,root) %{_bindir}/mbim-network
 %attr(755,root,root) %{_bindir}/mbimcli
 %attr(755,root,root) %{_libexecdir}/mbim-proxy
