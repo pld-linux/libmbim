@@ -6,13 +6,13 @@
 Summary:	GLib library for talking to WWAN modems and devices using MBIM protocol
 Summary(pl.UTF-8):	Biblioteka GLib do komunikacji z modemami i urządzeniami WWAN z użyciem protokołu MBIM
 Name:		libmbim
-Version:	1.30.0
+Version:	1.32.0
 Release:	1
 License:	LGPL v2
 Group:		Libraries
 #Source0Download: https://gitlab.freedesktop.org/mobile-broadband/libmbim/-/tags
 Source0:	https://gitlab.freedesktop.org/mobile-broadband/libmbim/-/archive/%{version}/%{name}-%{version}.tar.bz2
-# Source0-md5:	dcfb85bd4338f0aa8a851d5d80d123f7
+# Source0-md5:	c175b50028062eed802bfb271861b4f8
 URL:		https://www.freedesktop.org/wiki/Software/libmbim
 BuildRequires:	bash-completion-devel
 BuildRequires:	glib2-devel >= 1:2.56
@@ -24,7 +24,7 @@ BuildRequires:	ninja >= 1.5
 BuildRequires:	pkgconfig
 BuildRequires:	python3 >= 1:3
 BuildRequires:	rpm-build >= 4.6
-BuildRequires:	rpmbuild(macros) >= 1.736
+BuildRequires:	rpmbuild(macros) >= 2.042
 Requires:	glib2 >= 1:2.56
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -92,15 +92,15 @@ Bashowe dopełnianie składni poleceń libmbim (mbimcli).
 %setup -q
 
 %build
-%meson build \
+%meson \
 	%{?with_apidocs:-Dgtk_doc=true}
 
-%ninja_build -C build
+%meson_build
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
-%ninja_install -C build
+%meson_install
 
 %clean
 rm -rf $RPM_BUILD_ROOT
